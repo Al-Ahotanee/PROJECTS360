@@ -1,4 +1,5 @@
 # Projects360 two-service Render Blueprint
+# Both services are provisioned from this file and the same GitHub repository.
 services:
   - type: web
     name: projects360-api
@@ -19,8 +20,9 @@ services:
       - key: WEB_ORIGIN
         sync: false
 
-  - type: static
+  - type: web
     name: projects360-web
+    runtime: static
     rootDir: .
     plan: free
     buildCommand: npm ci --include=dev && npm run build:web

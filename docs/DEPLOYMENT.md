@@ -105,3 +105,9 @@ The expanded API is available under the `/api` prefix. Authenticated workflow gr
 The payment route currently exercises the configured payment boundary by recording a payment reference and updating the order state. It is intentionally not a live payment processor integration. Replace that adapter behavior with the chosen provider’s checkout and webhook verification before accepting real money in production.
 
 For a production smoke test, create a student through `/api/auth/signup`, use the returned bearer token to call `/api/projects`, create an order with `POST /api/orders`, submit a brief, verify the payment-adapter response, retrieve `/api/orders/:id`, add a file metadata record, submit a review, and confirm the corresponding notification. Verify admin routes with a user whose database role is `admin`.
+
+## 9. Render build fix for missing Nest CLI
+
+The repository now includes a root `.npmrc` with `include=dev`, and the Render blueprint explicitly uses `npm ci --include=dev` for both services. This is required because `@nestjs/cli` and `@angular/cli` are build-time `devDependencies`; when Render runs the build with production dependency omission enabled, `npm ci` can install the packages needed at runtime while omitting the CLI binaries required by the build commands. The previous `nest: not found` error was caused by that omission, not by a TypeScript or NestJS source error.
+
+If configuring Render manually rather than using `render.yaml`, set the API build command to `npm ci --include=dev && npm run build:api` and the static-site build command to `npm ci --include=dev && npm run build:web`. Commit the `.npmrc` and `render.yaml` changes, push them to GitHub, then trigger a fresh deploy.

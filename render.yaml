@@ -4,7 +4,7 @@ services:
     runtime: node
     rootDir: .
     plan: free
-    buildCommand: npm ci && npm run build:api
+    buildCommand: npm ci --include=dev && npm run build:api
     startCommand: npm run start:prod --workspace apps/api
     healthCheckPath: /api/health
     envVars:
@@ -19,7 +19,7 @@ services:
   - type: static
     name: projects360-web
     rootDir: .
-    buildCommand: npm ci && npm run build:web
+    buildCommand: npm ci --include=dev && npm run build:web
     staticPublishPath: apps/web/dist/projects360-web/browser
     routes:
       - type: rewrite

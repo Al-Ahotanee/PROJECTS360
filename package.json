@@ -1,0 +1,17 @@
+{
+  "name": "projects360-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Projects360 academic project marketplace rebuilt with Angular, NestJS and Neon PostgreSQL",
+  "workspaces": ["apps/web", "apps/api"],
+  "scripts": {
+    "dev:web": "npm --workspace apps/web start",
+    "dev:api": "npm --workspace apps/api run start:dev",
+    "build:web": "npm --workspace apps/web run build",
+    "build:api": "npm --workspace apps/api run build",
+    "build": "npm run build:web && npm run build:api",
+    "test:api": "npm --workspace apps/api run test",
+    "db:migrate": "psql \"$DATABASE_URL\" -f database/001_initial_schema.sql"
+  },
+  "engines": { "node": ">=20.11.0" }
+}

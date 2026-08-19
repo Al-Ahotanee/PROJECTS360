@@ -1,0 +1,1 @@
+module.exports = { roots:['<rootDir>/src'], moduleFileExtensions:['js','json','ts'], transform:{'^.+\\.ts$':['ts-jest',{tsconfig:'tsconfig.json'}]}, testRegex:'.*\\.spec\\.ts$', collectCoverageFrom:['src/**/*.ts'], coverageDirectory:'coverage', testEnvironment:'node' };

@@ -1,0 +1,17 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav #drawer mode="side" opened class="sidebar">
+    <div class="brand"><div class="brand-mark">P<span>3</span>6</div><div><strong>Projects360</strong><small>Academic studio</small></div></div>
+    <div class="workspace-switch"><span class="workspace-dot"></span><span>Student workspace</span><mat-icon>expand_more</mat-icon></div>
+    <p class="nav-caption">Workspace</p>
+    <nav class="nav-list">
+      <a *ngFor="let item of nav" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: item.link === '/dashboard'}"><mat-icon>{{ item.icon }}</mat-icon><span>{{ item.label }}</span></a>
+    </nav>
+    <p class="nav-caption secondary-caption">Account</p>
+    <nav class="nav-list"><a *ngFor="let item of secondary" [routerLink]="item.link" routerLinkActive="active"><mat-icon>{{ item.icon }}</mat-icon><span>{{ item.label }}</span></a></nav>
+    <div class="sidebar-footer"><div class="support-card"><span class="support-icon"><mat-icon>support_agent</mat-icon></span><div><strong>Need a hand?</strong><small>Talk to a project guide</small></div><mat-icon>arrow_outward</mat-icon></div><button mat-button class="logout" (click)="logout()"><mat-icon>logout</mat-icon> Sign out</button></div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <header class="topbar"><button mat-icon-button class="mobile-menu" (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button><div class="crumb"><span>Workspace</span><mat-icon>chevron_right</mat-icon><strong>Overview</strong></div><div class="top-actions"><button mat-icon-button matTooltip="Search"><mat-icon>search</mat-icon></button><button mat-icon-button matTooltip="Notifications"><mat-icon>notifications_none</mat-icon><span class="notification-dot"></span></button><div class="user-chip"><div class="avatar">AM</div><div class="user-meta"><strong>Alex Morgan</strong><small>Computer Science</small></div><mat-icon>expand_more</mat-icon></div></div></header>
+    <main class="page"><router-outlet></router-outlet></main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

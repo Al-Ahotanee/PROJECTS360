@@ -1,3 +1,4 @@
+# Projects360 two-service Render Blueprint
 services:
   - type: web
     name: projects360-api
@@ -7,6 +8,7 @@ services:
     buildCommand: npm ci --include=dev && npm run build:api
     startCommand: npm run start:prod --workspace apps/api
     healthCheckPath: /api/health
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
@@ -16,11 +18,14 @@ services:
         generateValue: true
       - key: WEB_ORIGIN
         sync: false
+
   - type: static
     name: projects360-web
     rootDir: .
+    plan: free
     buildCommand: npm ci --include=dev && npm run build:web
     staticPublishPath: apps/web/dist/projects360-web/browser
+    autoDeploy: true
     routes:
       - type: rewrite
         source: /*
